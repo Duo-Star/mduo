@@ -5,31 +5,36 @@ import { buy } from "../sample"
 import svgUnderline from '../assets/underline.svg'
 import arrowCard from '../assets/arrow-card.svg'
 
+import gmkBoard from '../assets/common/gmk_0_board.jpg';
+import mfD3 from '../assets/common/mf_d3.png';
+import gmkTest from '../assets/common/gmk_1_test.jpg';
+import lamS from '../assets/common/lam_s.png';
+
 const { pathname } = Astro.url
 
 const portfolio = [
-  { 
+  {
       name: 'GeoMKY 0.1.0',
       desc: `基于 Androlua 的几何作图探索软件`,
-      cover: `src/assets/common/gmk_0_board.jpg`,
+      cover: gmkBoard.src,
       link: ``
   },
-  { 
+  {
       name: 'MF 空间绘图器',
       desc: `空间隐式，参曲线/面`,
-      cover: `src/assets/common/mf_d3.png`,
+      cover: mfD3.src,
       link: ``
   },
-  { 
+  {
       name: 'GeoMKY 0.2.1',
       desc: `Flutter 跨平台数学绘图器`,
-      cover: `src/assets/common/gmk_1_test.jpg`,
+      cover: gmkTest.src,
       link: ``
   },
-  { 
+  {
       name: 'λ 演算',
       desc: `函数式的逻辑殿堂`,
-      cover: `src/assets/common/lam_s.png`,
+      cover: lamS.src,
       link: ``
   },
 ]
@@ -41,9 +46,9 @@ const portfolio = [
       <h1 class="text-4xl font-medium text-center">采 集</h1>
       <img src={svgUnderline.src} alt="arrow" width="140" class="absolute left-50 -bottom-1" />
     </div>
-  
-    <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10"> 
-      {portfolio.map(item => ( 
+
+    <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+      {portfolio.map(item => (
         <a href={item.link} target="_blank" class="flex flex-col bg-white p-5 group relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)]">
           <div class="w-full h-[200px] overflow-hidden border-2">
            <img src={item.cover} alt="" class="w-full h-full object-cover" />
