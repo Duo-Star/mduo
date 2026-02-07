@@ -12,6 +12,8 @@ import svgString from '../assets/string.svg'
 
 import { author, buy } from '../sample'
 
+import elainaImg from '../assets/common/elaina_q.jpg';
+
 ---
 
 
@@ -75,10 +77,11 @@ import { author, buy } from '../sample'
     <img src={svgPinkStar.src} alt="start" width="50" class="absolute -bottom-4" />
   </section>
 
-  <style>
-    #me{
-     background-image: url('src/assets/common/elaina_q.jpg');
-     background-position: top;
-     background-size: cover;
+<style>
+    #me {
+        /* 此时路径直接以 / 开头，不需要写 public */
+        background-image: url('img/elaina_q.jpg');
+        background-position: top;
+        background-size: cover;
     }
-   </style>
+</style>
