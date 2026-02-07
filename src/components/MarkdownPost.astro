@@ -12,33 +12,65 @@ const styleSheet = {
 }
 
 const { frontmatter } = Astro.props;
+
+/** * 核心逻辑：动态匹配 src/assets/common 下的图片
+ * 1. 使用 glob 获取目录下所有图片
+ * 2. 从 MD 传入的文件名拼凑出完整路径 key
+ */
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/common/*.{jpeg,jpg,png,gif,webp}');
+const imagePath = `/src/assets/common/${frontmatter.image.url}`;
+
+// 验证图片是否存在，不存在则报错或给个回退方案
+if (!images[imagePath]) {
+    throw new Error(`"${imagePath}" does not exist in "src/assets/common/". Check your Markdown!`);
+}
 ---
-
 <Layout>
+    <AppHeader />
 
-<AppHeader />
+    <section class="mb-30 p-3">
+        <div class="max-w-3xl mx-auto p-3 bg-white flex flex-col gap-7 border-3 mt-10 shadow-[8px_8px_0px_rgba(0,0,0,1)]">
 
-<section class="mb-30 p-3">
-    <div class="max-w-3xl mx-auto p-3 bg-white flex flex-col gap-7 border-3 mt-10">
-        <Image src={frontmatter.image.url} alt="Head" width={100} height={100} class="w-full border-2" />
-        <h1 class="title text-4xl font-black">{frontmatter.title}</h1>
+            <Image
+                    src={images[imagePath]()}
+                    alt={frontmatter.image.alt || "Cover"}
+                    width={800}
+                    height={450}
+                    class="w-full border-2 border-black object-cover"
+            />
 
-        <div class="flex flex-col">
-            <div class="flex border-t border-b border-gray-100 mb-5 py-4">
-                <div class="flex-1 flex gap-6">
-                    <a href="#" class={styleSheet.actions}><i class="ri-thumb-up-line text-xl"></i> {frontmatter.likes}</a>
-                    <a href="#" class={styleSheet.actions}><i class="ri-chat-1-line text-xl"></i> {frontmatter.comments}</a>
+            <h1 class="title text-4xl font-black">{frontmatter.title}</h1>
+
+            <div class="flex flex-col">
+                <div class="flex border-t-2 border-b-2 border-black mb-10 py-4">
+                    <div class="flex-1 flex gap-6">
+                        <span class={styleSheet.actions}><i class="ri-thumb-up-line text-xl"></i> {frontmatter.likes}</span>
+                        <span class={styleSheet.actions}><i class="ri-chat-1-line text-xl"></i> {frontmatter.comments}</span>
+                    </div>
                 </div>
-                <div class="flex gap-6">
-                    <a href="#" class={styleSheet.actions}><i class="ri-bookmark-line text-xl"></i> </a>
-                    <a href="#" class={styleSheet.actions}><i class="ri-share-forward-box-line text-xl"></i> </a>
-                </div>
+
+                <article class="prose prose-lg max-w-none prose-headings:font-black prose-p:text-gray-700">
+                    <slot />
+                </article>
             </div>
-        <slot />
-    </div>
-</section>
+        </div>
+    </section>
 
-<CallToAction />
-<AppFooter />
-
+    <CallToAction />
+    <AppFooter />
 </Layout>
+
+<style is:global>
+    /* 针对正文里的一些特殊 Markdown 元素进行微调 */
+    .prose blockquote {
+        border-left: 4px solid black !important;
+        background: #f3f4f6;
+        padding: 1rem;
+        font-style: italic;
+    }
+    .prose code {
+        background: #eee;
+        padding: 2px 4px;
+        border-radius: 4px;
+    }
+</style>
