@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Angie Portfolio</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style>
+
+    :root {
+        /* 你原本的颜色 */
+        --main-bg: #FEFFF0;
+        --blue: #BAE6FF;
+        --yellow: #FFDC58;
+
+        /* 扩展：Material Design 风格美学色系 */
+
+        /* 1. 温暖红 (Tertiary/Error 变体) - 柔和且醒目 */
+        --red: #FFB4AB;
+        --red-deep: #93000A;
+
+        /* 2. 宁静绿 (Success/Nature) - 适合自然主题 */
+        --green: #B2F1B8;
+        --green-dark: #002108;
+
+        /* 3. 优雅紫 (Secondary) - 增加视觉高级感 */
+        --purple: #EADDFF;
+        --purple-text: #21005D;
+
+        /* 4. 莫兰迪橘 (Accent) - 这里的橘色非常衬托黄白背景 */
+        --orange: #FFDDB3;
+        --orange-dark: #291800;
+
+        /* 5. 深色文字/阴影辅助 */
+        --neutral-80: #49454F;
+    }
+
+html,
+body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--main-bg);
+	font-family: "Space Grotesk", sans-serif;
+	scroll-behavior: smooth;
+}
+
+
+</style>

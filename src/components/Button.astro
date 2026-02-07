@@ -1,0 +1,24 @@
+---
+// 1. 从 Props 中增加 bgColor 参数
+const { text, link, target, bgColor = "var(--blue)" } = Astro.props
+
+import svgHl from '../assets/hl.svg'
+---
+
+<div class="relative group">
+    <a
+            href={link}
+            target={target}
+            style={{ backgroundColor: bgColor }}
+            class="text-black text-md font-medium flex items-center h-12 px-6 border-3 rounded-full transition-colors"
+    >
+        {text}
+    </a>
+
+    <img
+            src={svgHl.src}
+            width="30"
+            class="absolute -right-7 -bottom-3 transition-all duration-200 group-hover:-bottom-4"
+    />
+</div>
+

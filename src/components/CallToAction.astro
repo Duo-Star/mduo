@@ -1,0 +1,20 @@
+---
+import svgPinkStar from '../assets/pink-star.svg'
+import Button from './Button.astro'
+import { buy } from '../sample'
+import {author} from "../sample.ts";
+
+---
+
+
+<section class="px-3" id="hire">
+    <div class="max-w-3xl mx-auto bg-white text-center flex flex-col gap-4 border-3 shadow-[8px_8px_0px_rgba(0,0,0,0.3)]  relative p-10">
+     <h1 class="text-3xl">Let our story unfold.</h1>
+     <p class="text-lg max-w-lg mx-auto">很高兴认识与众不同的你！欢迎加入 QQ 大家庭</p>
+        <div class="flex justify-center items-center gap-16">
+            <Button text="加入QQ群组" link={author.qq_group} target="_blank" bgColor="var(--green)" />
+            <Button text="Github" link={author.github} target="_blank" />
+        </div>
+     <img src={svgPinkStar.src} alt="svg" width="80" class="absolute -top-10 right-20" />
+    </div>
+</section>

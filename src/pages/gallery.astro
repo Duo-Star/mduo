@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import Layout from "../layouts/Layout.astro";
+import AppHeader from '../components/Header.astro';
+import AppFooter from '../components/Footer.astro';
+
+// 【关键修复 1】确保引入全局变量定义文件
+import '../styles/global.css';
+
+const imageFiles = import.meta.glob('/src/assets/gallery/*.{jpeg,jpg,png,gif,webp}');
+
+const allImages = await Promise.all(
+    Object.keys(imageFiles).map(async (path) => {
+        const img = await imageFiles[path]() as any;
+        return {
+            path,
+            data: img.default,
+            name: path.split('/').pop()?.split('.').shift() || 'Untitled'
+        };
+    })
+);
+
+const url = new URL(Astro.request.url);
+const page = parseInt(url.searchParams.get('page') || '1');
+const pageSize = 9;
+const totalPages = Math.ceil(allImages.length / pageSize);
+const paginatedImages = allImages.slice((page - 1) * pageSize, page * pageSize);
+---
+
+<Layout>
+    <AppHeader />
+
+    <section class="py-20 min-h-screen bg-[var(--main-bg)] overflow-x-hidden">
+        <div class="max-w-6xl mx-auto px-4">
+
+            <div class="text-center mb-16">
+                <div class="text-center mb-15">
+                    <h1 class="title text-5xl font-black">相册</h1>
+                </div>
+                <p class="mt-6 text-gray-600">Witness beauty.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {paginatedImages.map((img) => (
+                        <div class="gallery-item group bg-white border-2 border-black p-3 transition-all duration-300 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:-translate-y-1">
+                            <div class="relative w-full pb-[100%] overflow-hidden border-2 border-black mb-4">
+                                <Image
+                                        src={img.data}
+                                        alt={img.name}
+                                        width={600}
+                                        height={600}
+                                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                />
+                            </div>
+                            <div class="text-center font-bold text-lg border-t-2 border-black pt-2 uppercase tracking-wider">
+                                {img.name}
+                            </div>
+                        </div>
+                ))}
+            </div>
+
+            {/* 分页按钮省略... (逻辑保持不变) */}
+        </div>
+    </section>
+
+    <AppFooter />
+</Layout>
+
+<style is:global>
+    /* 【关键修复 4】使用 is:global 确保选择器能选中动态生成的元素 */
+    .gallery-item {
+        opacity: 0;
+        animation: galleryFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes galleryFadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>

@@ -1,0 +1,43 @@
+---
+const mytools = [
+    'Duo Nature', 'River', 'Sun for Nat',
+    'Duo Star', 'Forest Store', 'Math Forest',
+    'GeoMKY', 'Duoply', 'Cedar', 'Pakoo',
+    'Zn', 'Tong ~', 'MiYu', 'Lambda_solver',
+    'PixelPath-lua', 'Duo World', 'Nature Math',
+    'Crystal vm', 'AtomDay', 'WinColorGoddess',
+    'MatCal2', 'PasteHelper'
+]
+--- 
+<script>
+import { gsap } from 'gsap';
+
+document.addEventListener('DOMContentLoaded', function () {
+    const clonedContainer = document.querySelector('#cloned') as any
+
+    Array.from(clonedContainer.children).forEach((img: any) => {
+        const clone = img.cloneNode(true); 
+        clonedContainer.appendChild(clone); 
+    })
+
+    const tl = gsap.timeline({ repeat: -1 });
+    tl.to(clonedContainer, {
+        x: -(clonedContainer.scrollWidth / 2),  duration: 80, ease: 'none'
+    })
+});
+</script>
+  
+
+
+<section class="bg-black py-6 relative z-5">
+    <div class="overflow-hidden">
+        <div class="flex items-center gap-10 md:gap-30" id="cloned">
+            {mytools.map(item => (
+              <div class="text-white flex-1 text-2xl whitespace-nowrap"> {item} </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+
+
