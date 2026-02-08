@@ -4,46 +4,58 @@ import Layout from "../layouts/Layout.astro";
 
 import AppHeader from '../components/Header.astro';
 import AppFooter from '../components/Footer.astro';
+import {author} from "../sample";
+import Button from "../components/Button.astro";
+import svgPinkStar from '../assets/pink-star.svg'
 const allFriends = Object.values(import.meta.glob('./friends/*.md', { eager: true }));
 
 ---
 
-
 <Layout>
     <AppHeader />
     <section class="py-40">
-        <div class="max-w-3xl mx-auto">
-          <div class="text-center mb-15">
+        <div class="max-w-6xl mx-auto px-4"> <div class="text-center mb-15">
             <h1 class="title text-5xl font-black">我的朋友</h1>
-          </div>
-
-                            <div class="p-3">
-                                {allFriends.map(({ frontmatter }: any) => (
-                                    /* 将链接直接指向 frontmatter.url */
-                                        <a
-                                                href={frontmatter.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="flex gap-4 items-center bg-white p-5 border-2 border-black mb-5 transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-none"
-                                        >
-                                            <div class="flex-shrink-0">
-                                                <div class="w-[100px] h-[100px] sm:w-[123px] sm:h-[123px] overflow-hidden border-2 border-black">
-                                                    <img src={frontmatter.avatar} alt={frontmatter.name} class="w-full h-full object-cover" />
-                                                </div>
-                                            </div>
-
-                                            <div class="flex flex-col gap-1 overflow-hidden">
-                                                <h1 class="text-xl font-bold truncate">{frontmatter.name}</h1>
-                                                <div class="line-clamp-2 text-gray-600 text-sm" set:html={frontmatter.description}></div>
-
-                                                <span class="text-xs text-[var(--blue)] font-mono mt-1 truncate">
-
-          </span>
-                                            </div>
-                                        </a>
-                                ))}
+        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-3">
+                {allFriends.map(({ frontmatter }: any) => (
+                        <a
+                                href={frontmatter.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex gap-4 items-center bg-white p-5 border-2 border-black transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-none"
+                        >
+                            <div class="flex-shrink-0">
+                                <div class="w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] overflow-hidden border-2 border-black">
+                                    <img src={frontmatter.avatar} alt={frontmatter.name} class="w-full h-full object-cover" />
+                                </div>
                             </div>
+                            <div class="flex flex-col gap-1 overflow-hidden">
+                                <h1 class="text-xl font-bold truncate">{frontmatter.name}</h1>
+                                <div class="line-clamp-2 text-gray-600 text-sm" set:html={frontmatter.description}></div>
+                                <span class="text-xs text-[var(--vanilla)] font-mono mt-1 truncate">{frontmatter.url.replace(/^https?:\/\//, '')}</span>
+                            </div>
+                        </a>
+                ))}
+            </div>
+        </div>
 
+        <div class="mt-66 max-w-3xl mx-auto bg-white text-center flex flex-col gap-4 border-3 shadow-[8px_8px_0px_rgba(0,0,0,0.3)]  relative p-10">
+            <h1 class="text-3xl">添加我？</h1>
+            <pre class="bg-gray-50 text-gray-800 p-6 border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] text-left">
+                <code class="font-mono text-sm leading-relaxed whitespace-pre">
+<span class="text-[var(--red-deep)] font-bold">name:</span> <span class="text-green-800">"Duo 云站"</span>
+<span class="text-[var(--red-deep)] font-bold">description:</span> <span class="text-green-800">"MathForest官方🌲|程序及数学可视化✨|屑魔女游世界🔮"</span>
+<span class="text-[var(--red-deep)] font-bold">avatar:</span> <span class="text-green-800">"https://www.mduo.cloud/elaina_q.jpg"</span>
+<span class="text-[var(--red-deep)] font-bold">url:</span> <span class="text-green-800">"https://www.mduo.cloud/"</span>
+                </code>
+            </pre>
+
+            <!--<div class="flex justify-center items-center gap-16">-->
+            <!--    <Button text="加入QQ群组" link={author.qq_group} target="_blank" bgColor="var(&#45;&#45;green)" />-->
+            <!--    <Button text="Github" link={author.github} target="_blank" />-->
+            <!--</div>-->
+            <img src={svgPinkStar.src} alt="svg" width="80" class="absolute -top-10 right-20" />
         </div>
     </section>
     <AppFooter />

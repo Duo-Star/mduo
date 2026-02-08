@@ -20,19 +20,18 @@ const sortedPosts = allPosts.sort((a, b) =>
 <Layout>
     <AppHeader />
 
-    <section class="py-40">
-        <div class="max-w-3xl mx-auto">
+    <section class="py-20 min-h-screen bg-[var(--main-bg)] overflow-x-hidden">
+        <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-15">
-                <h1 class="title text-5xl font-black italic">博客</h1>
+                <h1 class="title text-5xl font-black">博客</h1>
                 <p class="mt-4 text-gray-500">Thoughts, notes, and fragments.</p>
             </div>
 
             <div class="p-3">
-                {sortedPosts.map(({ url, frontmatter }) => {
+                {sortedPosts.map(({ url, frontmatter, rawContent }) => {
                     // 拼凑图片路径逻辑：/src/assets/common/ + MD里的文件名
                const imagePath = `/src/assets/common/${frontmatter.image?.url}`;
                     const postImage = images[imagePath]?.default;
-
                     return (
                             <a href={url} class="flex gap-6 items-center bg-white p-5 border-2 border-black mb-6 transition-all duration-200 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:-translate-y-1 group">
                                 {/* 图片预览容器 */}
@@ -54,12 +53,12 @@ const sortedPosts = allPosts.sort((a, b) =>
 
                                 {/* 文字内容 */}
                                 <div class="flex flex-col gap-2 overflow-hidden">
-                                    <h2 class="line-clamp-2 text-2xl font-black group-hover:text-[var(--blue)] transition-colors">
+                                    <h2 class="line-clamp-2 text-2xl font-black group-hover:text-[var(--purple-m)] transition-colors">
                                         {frontmatter.title}
                                     </h2>
                                     {/* 建议在 MD 中添加 description 字段，rawContent 会包含 YAML 源码导致显示混乱 */}
                                     <p class="line-clamp-2 text-gray-600 text-sm leading-relaxed">
-                                        {frontmatter.description || "Click to read more..."}
+                                        {rawContent || "Click to read more..."}
                                     </p>
                                     <div class="flex gap-4 mt-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">
                                         <span>{frontmatter.pubDate}</span>

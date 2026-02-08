@@ -1,8 +1,8 @@
 ---
 layout: ../../components/MarkdownPost.astro
-title: "MF 3D 绘图器"
+title: "Duo"
 image:
-  url: "mf_d3.png"
+  url: "magic_desk.png"
   alt: "xx"
 tags: ["math"]
 pubDate: 'Feb. 8 2026'
@@ -10,6 +10,4 @@ likes: '(+inf)k'
 comments: '+inf'
 ---
 
-很高兴介绍我的新项目
-
-好像没什么好说的
+这个地方理应写些什么
