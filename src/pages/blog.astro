@@ -18,6 +18,7 @@ const sortedPosts = allPosts.sort((a, b) =>
 ---
 
 <Layout>
+
     <AppHeader />
 
     <section class="py-20 min-h-screen bg-[var(--main-bg)] overflow-x-hidden">
@@ -29,15 +30,16 @@ const sortedPosts = allPosts.sort((a, b) =>
 
             <div class="p-3">
                 {sortedPosts.map(({ url, frontmatter, rawContent }) => {
-                    // 拼凑图片路径逻辑：/src/assets/common/ + MD里的文件名
-               const imagePath = `/src/assets/common/${frontmatter.image?.url}`;
+                    const imagePath = `/src/assets/common/${frontmatter.image?.url}`;
                     const postImage = images[imagePath]?.default;
+
                     return (
                             <a href={url} class="flex gap-6 items-center bg-white p-5 border-2 border-black mb-6 transition-all duration-200 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:-translate-y-1 group">
-                                {/* 图片预览容器 */}
-                                <div class="flex-shrink-0">
-                                    <div class="w-[180px] h-[120px] overflow-hidden border-2 border-black bg-gray-100">
-                                        {postImage ? (
+
+                                {/* 只有当 postImage 存在时才渲染图片容器 */}
+                                {postImage && (
+                                        <div class="flex-shrink-0">
+                                            <div class="w-[180px] h-[120px] overflow-hidden border-2 border-black bg-gray-100">
                                                 <Image
                                                         src={postImage}
                                                         alt={frontmatter.title}
@@ -45,18 +47,15 @@ const sortedPosts = allPosts.sort((a, b) =>
                                                         height={260}
                                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                                 />
-                                        ) : (
-                                                <div class="w-full h-full flex items-center justify-center text-gray-400 text-xs">No Image</div>
-                                        )}
-                                    </div>
-                                </div>
+                                            </div>
+                                        </div>
+                                )}
 
-                                {/* 文字内容 */}
-                                <div class="flex flex-col gap-2 overflow-hidden">
+                                {/* 文字内容：如果没有图片，它会自动占据全部宽度 */}
+                                <div class="flex flex-col gap-2 overflow-hidden flex-grow">
                                     <h2 class="line-clamp-2 text-2xl font-black group-hover:text-[var(--purple-m)] transition-colors">
                                         {frontmatter.title}
                                     </h2>
-                                    {/* 建议在 MD 中添加 description 字段，rawContent 会包含 YAML 源码导致显示混乱 */}
                                     <p class="line-clamp-2 text-gray-600 text-sm leading-relaxed">
                                         {rawContent || "Click to read more..."}
                                     </p>

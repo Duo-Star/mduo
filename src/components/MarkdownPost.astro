@@ -13,31 +13,39 @@ const styleSheet = {
 
 const { frontmatter } = Astro.props;
 
-/** * 核心逻辑：动态匹配 src/assets/common 下的图片
- * 1. 使用 glob 获取目录下所有图片
- * 2. 从 MD 传入的文件名拼凑出完整路径 key
+/** * 核心逻辑修改：
  */
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/common/*.{jpeg,jpg,png,gif,webp}');
-const imagePath = `/src/assets/common/${frontmatter.image.url}`;
 
-// 验证图片是否存在，不存在则报错或给个回退方案
-if (!images[imagePath]) {
-    throw new Error(`"${imagePath}" does not exist in "src/assets/common/". Check your Markdown!`);
-}
+// 1. 安全提取路径，如果 frontmatter.image 没定义则为 null
+const imageFileName = frontmatter.image?.url;
+const imagePath = imageFileName ? `/src/assets/common/${imageFileName}` : null;
+
+// 2. 只有当路径存在且在 glob 列表中能找到时，才标记为有效
+const hasImage = imagePath && images[imagePath];
 ---
 <Layout>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+            integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+            crossorigin="anonymous"
+    />
     <AppHeader />
 
     <section class="mb-30 p-3">
         <div class="max-w-3xl mx-auto p-3 bg-white flex flex-col gap-7 border-3 mt-10 shadow-[8px_8px_0px_rgba(0,0,0,1)]">
 
-            <Image
-                    src={images[imagePath]()}
-                    alt={frontmatter.image.alt || "Cover"}
-                    width={800}
-                    height={450}
-                    class="w-full border-2 border-black object-cover"
-            />
+            {/* 3. 使用逻辑与判断：只有 hasImage 为真时才渲染图片区域 */}
+            {hasImage && (
+                    <Image
+                            src={images[imagePath]()}
+                            alt={frontmatter.image.alt || "Cover"}
+                            width={800}
+                            height={450}
+                            class="w-full border-2 border-black object-cover"
+                    />
+            )}
 
             <h1 class="title text-4xl font-black">{frontmatter.title}</h1>
 
@@ -61,16 +69,5 @@ if (!images[imagePath]) {
 </Layout>
 
 <style is:global>
-    /* 针对正文里的一些特殊 Markdown 元素进行微调 */
-    .prose blockquote {
-        border-left: 4px solid black !important;
-        background: #f3f4f6;
-        padding: 1rem;
-        font-style: italic;
-    }
-    .prose code {
-        background: #eee;
-        padding: 2px 4px;
-        border-radius: 4px;
-    }
+    /* ... 保持不变 ... */
 </style>
