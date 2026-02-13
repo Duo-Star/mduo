@@ -1,0 +1,193 @@
+---
+// PinnedCard.astro
+---
+
+<div class="col-span-1 md:col-span-2 mb-4">
+    <a
+            href="https://yeastar.xin/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group block relative bg-[var(--purple)] p-8 border-4 border-black transition-all duration-200 hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-none overflow-hidden"
+    >
+        <!-- 碎片网格容器 -->
+        <div class="fragment-grid absolute inset-0 z-10 pointer-events-none">
+            <!-- 碎片会通过 JavaScript 生成 -->
+        </div>
+
+        <!-- Pin 标签 -->
+        <div class="pin-badge absolute top-0 right-0 bg-black text-white px-4 py-1 font-black text-sm uppercase tracking-widest opacity-0">
+            Pin ❤️
+        </div>
+
+        <!-- 内容容器 -->
+        <div class="content-wrapper opacity-0 flex flex-col md:flex-row gap-6 items-center relative z-20">
+            <div class="flex-shrink-0">
+                <div class="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] overflow-hidden border-4 border-black shadow-[4px_4px_0px_black]">
+                    <img src="/yueosa.jpg" alt="her avatar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3 text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-black italic text-reveal">YukiKoi</h2>
+                <p class="text-lg text-gray-800 font-bold leading-relaxed text-reveal">
+                    欢迎来到我的世界, 这里没有神, 只有我构筑的代码、记忆和光
+                </p>
+                <div class="flex items-center justify-center md:justify-start gap-2 text-reveal">
+                    <span class="bg-black text-white px-2 py-0.5 text-xs font-mono">
+                        yeastar.xin
+                    </span>
+                    <span class="text-2xl animate-bounce">☆</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<style>
+    .fragment-grid {
+        display: grid;
+        gap: 0;
+    }
+
+    .fragment {
+        background: var(--purple);
+        opacity: 0;
+        transform: scale(0);
+        animation: fragment-gather 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes fragment-gather {
+        0% {
+            opacity: 0;
+            transform: scale(0) translate(var(--tx), var(--ty)) rotate(var(--rotate));
+        }
+        60% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) translate(0, 0) rotate(0deg);
+        }
+    }
+
+    .content-wrapper {
+        animation: content-fade-in 0.6s ease-out 0.8s forwards;
+    }
+
+    @keyframes content-fade-in {
+        to {
+            opacity: 1;
+        }
+    }
+
+    .pin-badge {
+        animation: badge-slide-in 0.4s ease-out 1.2s forwards;
+    }
+
+    @keyframes badge-slide-in {
+        from {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .text-reveal {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    .text-reveal:nth-of-type(1) {
+        animation: text-expand 0.5s ease-out 1.0s forwards;
+    }
+
+    .text-reveal:nth-of-type(2) {
+        animation: text-expand 0.5s ease-out 1.2s forwards;
+    }
+
+    .text-reveal:nth-of-type(3) {
+        animation: text-expand 0.5s ease-out 1.4s forwards;
+    }
+
+    @keyframes text-expand {
+        0% {
+            opacity: 0;
+            transform: translateY(10px) scaleY(0.8);
+            transform-origin: top;
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scaleY(1);
+        }
+    }
+</style>
+
+<script>
+    function initFragmentAnimation() {
+        const cards = document.querySelectorAll('.fragment-grid');
+
+        cards.forEach(container => {
+            const parent = container.parentElement;
+            if (!parent) return;
+
+            const rect = parent.getBoundingClientRect();
+            const fragmentSize = 25; // 每个碎片的大小
+            const cols = Math.ceil(rect.width / fragmentSize);
+            const rows = Math.ceil(rect.height / fragmentSize);
+
+            container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+
+            // 生成碎片
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const fragment = document.createElement('div');
+                    fragment.className = 'fragment';
+
+                    // 计算碎片从哪个方向飞入
+                    const centerX = cols / 2;
+                    const centerY = rows / 2;
+                    const deltaX = col - centerX;
+                    const deltaY = row - centerY;
+
+                    // 根据位置确定飞入方向和距离
+                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                    const angle = Math.atan2(deltaY, deltaX);
+                    const flyDistance = 200 + distance * 30; // 距离中心越远飞得越远
+
+                    const tx = Math.cos(angle) * flyDistance;
+                    const ty = Math.sin(angle) * flyDistance;
+                    const rotate = (Math.random() - 0.5) * 360;
+
+                    fragment.style.setProperty('--tx', `${tx}px`);
+                    fragment.style.setProperty('--ty', `${ty}px`);
+                    fragment.style.setProperty('--rotate', `${rotate}deg`);
+
+                    // 添加延迟，从中心向外扩散
+                    const delay = distance * 0.02;
+                    fragment.style.animationDelay = `${delay}s`;
+
+                    container.appendChild(fragment);
+                }
+            }
+
+            // 动画完成后移除碎片层
+            setTimeout(() => {
+                container.style.display = 'none';
+            }, 2000);
+        });
+    }
+
+    // 页面加载时初始化
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFragmentAnimation);
+    } else {
+        initFragmentAnimation();
+    }
+
+    // Astro 页面切换时重新初始化
+    document.addEventListener('astro:page-load', initFragmentAnimation);
+</script>

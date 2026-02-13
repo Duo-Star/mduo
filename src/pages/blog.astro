@@ -6,7 +6,7 @@ import AppHeader from '../components/Header.astro';
 import AppFooter from '../components/Footer.astro';
 
 // 1. 获取所有文章
-const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true })) as any[];
+const allPosts = Object.values(import.meta.glob('./posts/*.{md,mdx}', { eager: true })) as any[];
 
 // 2. 核心逻辑：获取 assets 下的所有图片对象
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/common/*.{jpeg,jpg,png,gif,webp,avif}', { eager: true });
@@ -29,7 +29,7 @@ const sortedPosts = allPosts.sort((a, b) =>
             </div>
 
             <div class="p-3">
-                {sortedPosts.map(({ url, frontmatter, rawContent }) => {
+                {sortedPosts.map(({ url, frontmatter, rawContent }, index)  => {
                     const imagePath = `/src/assets/common/${frontmatter.image?.url}`;
                     const postImage = images[imagePath]?.default;
 

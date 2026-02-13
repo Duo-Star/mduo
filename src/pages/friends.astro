@@ -8,40 +8,54 @@ import {author} from "../sample";
 import Button from "../components/Button.astro";
 import svgPinkStar from '../assets/pink-star.svg'
 const allFriends = Object.values(import.meta.glob('./friends/*.md', { eager: true }));
-
 ---
 
 <Layout>
     <AppHeader />
     <section class="py-40">
-        <div class="max-w-6xl mx-auto px-4"> <div class="text-center mb-15">
-            <h1 class="title text-5xl font-black">友链</h1>
-        </div>
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-15">
+                <h1 class="title text-5xl font-black">友链</h1>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-3">
 
-                <div class="col-span-1 md:col-span-2 mb-4">
+                <!--置顶 ❤️ yeastar (特效版)-->
+                <div class="col-span-1 md:col-span-2 mb-4 relative min-h-[280px] md:min-h-[220px]" id="pin-card-wrapper">
+
+                    <!-- 碎片容器 (动画时显示) -->
+                    <div id="fragment-container" class="absolute inset-0 z-20 pointer-events-none overflow-visible"></div>
+
+                    <!-- 真实卡片内容 (初始隐藏，动画后显现) -->
                     <a
+                            id="real-card"
                             href="https://yeastar.xin/"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="group flex flex-col md:flex-row gap-6 items-center bg-[var(--purple)] p-8 border-4 border-black transition-all duration-200 hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-none relative overflow-hidden"
                     >
-                        <div class="absolute top-0 right-0 bg-black text-white px-4 py-1 font-black text-sm uppercase tracking-widest">
+                        <!-- 悬浮阴影 (单独做层以配合动画) -->
+                        <!--<div class="absolute inset-0 border-4 border-black transition-all duration-200 group-hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] pointer-events-none z-10"></div>-->
+
+                        <!-- Pin 标签 -->
+                        <div class="reveal-item absolute top-0 right-0 bg-black text-white px-4 py-1 font-black text-sm uppercase tracking-widest z-20">
                             Pin ❤️
                         </div>
 
-                        <div class="flex-shrink-0">
-                            <div class="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] overflow-hidden border-4 border-black shadow-[4px_4px_0px_black]">
+                        <!-- 头像部分 -->
+                        <div class="flex-shrink-0 z-10 reveal-item">
+                            <div class="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] overflow-hidden border-4 border-black shadow-[4px_4px_0px_black] bg-white">
                                 <img src="/yueosa.jpg" alt="her avatar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                             </div>
                         </div>
 
-                        <div class="flex flex-col gap-3 text-center md:text-left">
-                            <h2 class="text-3xl md:text-4xl font-black italic">YukiKoi</h2>
-                            <p class="text-lg text-gray-800 font-bold leading-relaxed">
+                        <!-- 文字部分 -->
+                        <div class="flex flex-col gap-3 text-center md:text-left z-10 w-full">
+                            <h2 class="reveal-item text-3xl md:text-4xl font-black italic">YukiKoi</h2>
+                            <p class="reveal-item text-lg text-gray-800 font-bold leading-relaxed delay-100">
                                 欢迎来到我的世界, 这里没有神, 只有我构筑的代码、记忆和光
                             </p>
-                            <div class="flex items-center justify-center md:justify-start gap-2">
+                            <div class="reveal-item flex items-center justify-center md:justify-start gap-2 delay-200">
                                 <span class="bg-black text-white px-2 py-0.5 text-xs font-mono">
                                     {"https://yeastar.xin".replace(/^https?:\/\//, '')}
                                 </span>
@@ -50,6 +64,7 @@ const allFriends = Object.values(import.meta.glob('./friends/*.md', { eager: tru
                         </div>
                     </a>
                 </div>
+                <!--置顶结束-->
 
                 <div class="col-span-1 md:col-span-2 pt-10 pb-4">
                     <div class="flex items-center gap-3">
@@ -85,7 +100,7 @@ const allFriends = Object.values(import.meta.glob('./friends/*.md', { eager: tru
             </div>
         </div>
 
-        <div class="mt-66 max-w-3xl mx-auto bg-white text-center flex flex-col gap-4 border-3 shadow-[8px_8px_0px_rgba(0,0,0,0.3)]  relative p-10">
+        <div class="mt-66 max-w-3xl mx-auto bg-white text-center flex flex-col gap-4 border-3 shadow-[8px_8px_0px_rgba(0,0,0,0.3)] relative p-10">
             <h1 class="text-3xl">添加我？</h1>
             <pre class="bg-gray-50 text-gray-800 p-6 border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] overflow-x-auto text-left">
                 <code class="font-mono text-sm leading-relaxed whitespace-pre">
@@ -95,13 +110,141 @@ const allFriends = Object.values(import.meta.glob('./friends/*.md', { eager: tru
 <span class="text-[var(--red-deep)] font-bold">url:</span> <span class="text-green-800">"https://www.mduo.cloud/"</span>
                 </code>
             </pre>
-
-            <!--<div class="flex justify-center items-center gap-16">-->
-            <!--    <Button text="加入QQ群组" link={author.qq_group} target="_blank" bgColor="var(&#45;&#45;green)" />-->
-            <!--    <Button text="Github" link={author.github} target="_blank" />-->
-            <!--</div>-->
             <img src={svgPinkStar.src} alt="svg" width="80" class="absolute -top-10 right-20" />
         </div>
     </section>
     <AppFooter />
 </Layout>
+
+<style>
+    /* 碎片的基础样式 */
+    :global(.shard) {
+        position: absolute;
+        background-color: var(--purple); /* 对应卡片背景色 */
+        opacity: 0;
+        /* 使用自定义变量控制初始位置 */
+        transform: translate3d(var(--tx), var(--ty), 0) scale(0) rotate(var(--r));
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-in;
+        will-change: transform, opacity;
+        z-index: 50;
+    }
+
+    /* 碎片聚合态 */
+    :global(.shard.assembled) {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1.01) rotate(0deg); /* scale 1.01 防止缝隙 */
+    }
+
+    /* 真实卡片显现 */
+    .card-visible {
+        animation: cardFadeIn 0.1s forwards;
+    }
+
+    @keyframes cardFadeIn {
+        to { opacity: 1; }
+    }
+
+    /* 内容展开动画 */
+    .reveal-item {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card-visible .reveal-item {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* 交错延迟 */
+    .card-visible .reveal-item:nth-child(1) { transition-delay: 0.1s; }
+    .card-visible .reveal-item:nth-child(2) { transition-delay: 0.2s; }
+    .card-visible .reveal-item:nth-child(3) { transition-delay: 0.3s; }
+    /* 文字部分内部的延迟 */
+    .card-visible .flex-col .reveal-item:nth-child(1) { transition-delay: 0.2s; }
+    .card-visible .flex-col .reveal-item:nth-child(2) { transition-delay: 0.3s; }
+    .card-visible .flex-col .reveal-item:nth-child(3) { transition-delay: 0.4s; }
+
+</style>
+
+<script>
+    function initCardAnimation() {
+        const container = document.getElementById('fragment-container');
+        const realCard = document.getElementById('real-card');
+        const wrapper = document.getElementById('pin-card-wrapper');
+
+        if (!container || !realCard || !wrapper) return;
+
+        // 清理旧碎片（防止热重载或路由跳转重复生成）
+        container.innerHTML = '';
+        realCard.classList.remove('card-visible');
+        realCard.style.opacity = '0';
+
+        // 配置：网格行列数
+        const cols = 12;
+        const rows = 6;
+
+        const width = wrapper.offsetWidth;
+        const height = wrapper.offsetHeight;
+
+        const cellW = width / cols;
+        const cellH = height / rows;
+
+        const shards = [];
+
+        // 生成碎片
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const shard = document.createElement('div');
+                shard.classList.add('shard');
+
+                // 设定宽高和位置
+                shard.style.width = `${Math.ceil(cellW)}px`;
+                shard.style.height = `${Math.ceil(cellH)}px`;
+                shard.style.left = `${c * cellW}px`;
+                shard.style.top = `${r * cellH}px`;
+
+                // 随机生成飞入前的偏移量 (从屏幕外四面八方飞来)
+                // 范围扩大到 500px - 1000px 之外
+                const randomX = (Math.random() - 0.5) * window.innerWidth * 1.5;
+                const randomY = (Math.random() - 0.5) * window.innerHeight * 1.5;
+                const randomRotate = (Math.random() - 0.5) * 360;
+
+                shard.style.setProperty('--tx', `${randomX}px`);
+                shard.style.setProperty('--ty', `${randomY}px`);
+                shard.style.setProperty('--r', `${randomRotate}deg`);
+
+                // 随机延迟一点点，让飞入更有层次感，而不是整齐划一
+                shard.style.transitionDelay = `${Math.random() * 0.2}s`;
+
+                container.appendChild(shard);
+                shards.push(shard);
+            }
+        }
+
+        // 触发动画：强制重绘后添加类名
+        requestAnimationFrame(() => {
+            // 给一个小小的延迟确保DOM已渲染
+            setTimeout(() => {
+                shards.forEach(s => s.classList.add('assembled'));
+            }, 50);
+        });
+
+        // 碎片汇聚完成后，显示真卡片，移除碎片
+        // CSS transition 是 0.8s + max delay 0.2s = 1.0s 左右
+        setTimeout(() => {
+            realCard.classList.add('card-visible');
+
+            // 真实卡片出来后，稍微等一下再移除碎片，避免闪烁
+            setTimeout(() => {
+                container.innerHTML = ''; // 移除碎片减轻DOM压力
+            }, 200);
+
+        }, 900);
+    }
+
+    // 在 Astro 页面加载时运行
+    document.addEventListener('DOMContentLoaded', initCardAnimation);
+    // 兼容 Astro View Transitions (如果后续开启了视图过渡)
+    document.addEventListener('astro:page-load', initCardAnimation);
+</script>
