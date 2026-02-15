@@ -7,7 +7,19 @@ import AppFooter from '../components/Footer.astro';
 import {author} from "../sample";
 import Button from "../components/Button.astro";
 import svgPinkStar from '../assets/pink-star.svg'
-const allFriends = Object.values(import.meta.glob('./friends/*.md', { eager: true }));
+// 1. 获取原始对象（包含路径和内容）
+const globFiles = import.meta.glob('./friends/*.md', { eager: true });
+
+// 2. 提取并排序
+const allFriends = Object.entries(globFiles)
+    .sort(([pathA], [pathB]) => {
+        // 使用 localeCompare 的数字模式进行自然排序
+        return pathA.localeCompare(pathB, undefined, {
+            numeric: true,
+            sensitivity: 'base'
+        });
+    })
+    .map(([path, module]) => module); // 只保留模块内容
 ---
 
 <Layout>
