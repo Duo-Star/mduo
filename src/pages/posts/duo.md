@@ -21,7 +21,7 @@ comments: '+inf'
 
 听[音乐](https://music.163.com/#/user/home?id=1719190026)乐乐乐乐乐（纯音+英文）
 
-喜欢摄像，[东拍西拍](https://www.mduo.cloud/gallery/)
+喜欢摄像，[东拍西拍](https://www.mduo.cloud/gallery/1)
 
 打羽毛球，看心情遛弯~或跑步，篮球菜菜
 
@@ -41,7 +41,7 @@ comments: '+inf'
 
 2022-12 制作 Lua脚本驱动的数学可视化 Duo Nature, Duo Star(浏览器), Duo Music
 
-2023-1 与[苦小怕](https://doc.kulipai.top/avator.png)合作制作Forest Store 应用商店，体验服务器、前后端、数据库
+2023-1 与[苦小怕](https://doc.kulipai.top/)合作制作Forest Store 应用商店，体验服务器、前后端、数据库
 
 2023-5 Lua-Duo Nature 物理引擎，CAS 初步
 
