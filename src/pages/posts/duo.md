@@ -100,14 +100,13 @@ MF营造广泛的⛰️`自然科学` 交流环境！
 
 #### 🌙群友项目
 
-| 名称            | 简介           | 作者             | 平台      | 状态   |
-| ------------- | ------------ | -------------- | ------- | ---- |
-| `SGC`         | Scratch图形计算器 | SQY            | web跨平台  | 发布   |
-| `StuCanvas`   | 图形计算器        | Friendships666 | web跨平台  | 开发   |
-| `General-DSP` | 用于 APT 解调    | AstarLC        | win     | 开发   |
-| `lua-hook`    | 用lua进行hook   | 苦小怕            | android | 发布   |
-| `简函云记`        | 云笔记          | 高小离            | android | 发布   |
-
+| 名称                                                        | 简介           | 作者             |  
+|-----------------------------------------------------------|--------------|----------------|  
+| [SGC](https://sqy419.axolotlpower.com/sgc/)               | Scratch图形计算器 | SQY            |  
+| [StuCanvas](https://github.com/Friendships6666/StuCanvas) | Cpp图形计算器     | Friendships666 |  
+| [General-DSP](https://github.com/AstarLC4036/General-DSP) | 用于 APT 解调    | AstarLC        |  
+| [LuaHook](https://github.com/KuLiPai/LuaHook)             | 用lua进行hook   | 苦小怕            |  
+| 简函云记                                                      | 云笔记          | 高小离            |
 
 
 ## 关于名字
