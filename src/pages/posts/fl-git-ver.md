@@ -7,7 +7,6 @@ likes: '+inf'
 comments: '+inf'
 ---
 
-
 # 自用分享 - 为 Flutter 配置 GitHub - Vercel 自动化
 
 我喜欢使用 Flutter 制作小玩具，也有部署到网页的需求，同时我不想占用自己服务器，同时希望自动化，如果你和我一样，那你需要这个。
