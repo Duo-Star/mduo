@@ -32,51 +32,51 @@ const allFriends = Object.entries(globFiles)
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-3">
 
-                <!--置顶 ❤️ yeastar (特效版)-->
-                <div class="col-span-1 md:col-span-2 mb-4 relative min-h-[280px] md:min-h-[220px]" id="pin-card-wrapper">
+                <!--&lt;!&ndash;置顶 ❤️ yeastar (特效版)&ndash;&gt;-->
+                <!--<div class="col-span-1 md:col-span-2 mb-4 relative min-h-[280px] md:min-h-[220px]" id="pin-card-wrapper">-->
 
-                    <!-- 碎片容器 (动画时显示) -->
-                    <div id="fragment-container" class="absolute inset-0 z-20 pointer-events-none overflow-visible"></div>
+                <!--    &lt;!&ndash; 碎片容器 (动画时显示) &ndash;&gt;-->
+                <!--    <div id="fragment-container" class="absolute inset-0 z-20 pointer-events-none overflow-visible"></div>-->
 
-                    <!-- 真实卡片内容 (初始隐藏，动画后显现) -->
-                    <a
-                            id="real-card"
-                            href="https://yeastar.xin/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="group flex flex-col md:flex-row gap-6 items-center bg-[var(--purple)] p-8 border-4 border-black transition-all duration-200 hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-none relative overflow-hidden"
-                    >
-                        <!-- 悬浮阴影 (单独做层以配合动画) -->
-                        <!--<div class="absolute inset-0 border-4 border-black transition-all duration-200 group-hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] pointer-events-none z-10"></div>-->
+                <!--    &lt;!&ndash; 真实卡片内容 (初始隐藏，动画后显现) &ndash;&gt;-->
+                <!--    <a-->
+                <!--            id="real-card"-->
+                <!--            href="https://yeastar.xin/"-->
+                <!--            target="_blank"-->
+                <!--            rel="noopener noreferrer"-->
+                <!--            class="group flex flex-col md:flex-row gap-6 items-center bg-[var(&#45;&#45;purple)] p-8 border-4 border-black transition-all duration-200 hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-none relative overflow-hidden"-->
+                <!--    >-->
+                <!--        &lt;!&ndash; 悬浮阴影 (单独做层以配合动画) &ndash;&gt;-->
+                <!--        &lt;!&ndash;<div class="absolute inset-0 border-4 border-black transition-all duration-200 group-hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] pointer-events-none z-10"></div>&ndash;&gt;-->
 
-                        <!-- Pin 标签 -->
-                        <div class="reveal-item absolute top-0 right-0 bg-black text-white px-4 py-1 font-black text-sm uppercase tracking-widest z-20">
-                            Pin ❤️
-                        </div>
+                <!--        &lt;!&ndash; Pin 标签 &ndash;&gt;-->
+                <!--        <div class="reveal-item absolute top-0 right-0 bg-black text-white px-4 py-1 font-black text-sm uppercase tracking-widest z-20">-->
+                <!--            Pin ❤️-->
+                <!--        </div>-->
 
-                        <!-- 头像部分 -->
-                        <div class="flex-shrink-0 z-10 reveal-item">
-                            <div class="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] overflow-hidden border-4 border-black shadow-[4px_4px_0px_black] bg-white">
-                                <img src="/yueosa.jpg" alt="her avatar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                            </div>
-                        </div>
+                <!--        &lt;!&ndash; 头像部分 &ndash;&gt;-->
+                <!--        <div class="flex-shrink-0 z-10 reveal-item">-->
+                <!--            <div class="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] overflow-hidden border-4 border-black shadow-[4px_4px_0px_black] bg-white">-->
+                <!--                <img src="/yueosa.jpg" alt="her avatar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />-->
+                <!--            </div>-->
+                <!--        </div>-->
 
-                        <!-- 文字部分 -->
-                        <div class="flex flex-col gap-3 text-center md:text-left z-10 w-full">
-                            <h2 class="reveal-item text-3xl md:text-4xl font-black italic">YukiKoi</h2>
-                            <p class="reveal-item text-lg text-gray-800 font-bold leading-relaxed delay-100">
-                                欢迎来到我的世界, 这里没有神, 只有我构筑的代码、记忆和光
-                            </p>
-                            <div class="reveal-item flex items-center justify-center md:justify-start gap-2 delay-200">
-                                <span class="bg-black text-white px-2 py-0.5 text-xs font-mono">
-                                    {"在 1770314117 我遇见了你".replace(/^https?:\/\//, '')}
-                                </span>
-                                <span class="text-2xl animate-bounce">☆</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!--置顶结束-->
+                <!--        &lt;!&ndash; 文字部分 &ndash;&gt;-->
+                <!--        <div class="flex flex-col gap-3 text-center md:text-left z-10 w-full">-->
+                <!--            <h2 class="reveal-item text-3xl md:text-4xl font-black italic">YukiKoi</h2>-->
+                <!--            <p class="reveal-item text-lg text-gray-800 font-bold leading-relaxed delay-100">-->
+                <!--                欢迎来到我的世界, 这里没有神, 只有我构筑的代码、记忆和光-->
+                <!--            </p>-->
+                <!--            <div class="reveal-item flex items-center justify-center md:justify-start gap-2 delay-200">-->
+                <!--                <span class="bg-black text-white px-2 py-0.5 text-xs font-mono">-->
+                <!--                    {"在 1770314117 我遇见了你".replace(/^https?:\/\//, '')}-->
+                <!--                </span>-->
+                <!--                <span class="text-2xl animate-bounce">☆</span>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </a>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;置顶结束&ndash;&gt;-->
 
                 <div class="col-span-1 md:col-span-2 pt-10 pb-4">
                     <div class="flex items-center gap-3">
