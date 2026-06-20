@@ -9,7 +9,6 @@ pubDate: 'Feb. 8 2026'
 likes: '+inf'
 comments: '+inf'
 ---
-~~其实写自我介绍我并不擅长~~
 
 07 年，双子星 - 阳光开朗大男孩
 
@@ -109,6 +108,9 @@ MF营造广泛的⛰️`自然科学` 交流环境！
 | 简函云记                                                      | 云笔记          | 高小离            |
 
 
+---
+
+
 ## 关于名字
 
 1. Duo
@@ -123,33 +125,23 @@ MF营造广泛的⛰️`自然科学` 交流环境！
 
     我的[推特](https://x.com/Huluhuhululuhu)用户名 ~~说梦话时录的（？~~
 
-
+---
 
 ## 开源程序
 
 ### Lua
 
-[归档合集](https://github.com/Duo-Star/fa2-memory)
-
-[GMK-lua](https://github.com/Duo-Star/GMK-lua)
-
-[MiYu-lua](https://github.com/Duo-Star/MiYu-lua)
-
-[MatCal2](https://github.com/Duo-Star/MatCal2)
-
-[River-lua](https://github.com/Duo-Star/River-lua)
-
-[Pakoo-lua](https://github.com/Duo-Star/Pakoo-lua)
-
-[PixelPath-lua](https://github.com/Duo-Star/PixelPath-lua)
-
-[MC-highway-lua](https://github.com/Duo-Star/MC-highway-lua)
-
-[NatureMath-lua](https://github.com/Duo-Star/NatureMath-lua)
-
-[Crystal-lua](https://github.com/Duo-Star/Crystal-lua)
-
-[Bad-Apple-lua](https://github.com/Duo-Star/Bad-Apple-lua)
-
-[AtomDay-lua](https://github.com/Duo-Star/AtomDay-lua)
-
+| Lua                                                          | Dart                                                                   | C/Cpp                                                          | Kt/Java                                            | Rust                                                       |
+|--------------------------------------------------------------|------------------------------------------------------------------------|----------------------------------------------------------------|----------------------------------------------------|------------------------------------------------------------|
+| [归档合集](https://github.com/Duo-Star/fa2-memory)               | [GeoMKY](https://github.com/Duo-Star/geomky)                           | [Cherry](https://github.com/Duo-Star/Cherry)                   | [DuoplySCQ](https://github.com/Duo-Star/DuoplySCQ) | [Lambda_solver](https://github.com/Duo-Star/Lambda_solver) |
+| [GMK-lua](https://github.com/Duo-Star/GMK-lua)               | [Zn](https://github.com/Duo-Star/Zn)                                   | [WinColorGoddess](https://github.com/Duo-Star/WinColorGoddess) |                                                    |                                                            |
+| [MiYu-lua](https://github.com/Duo-Star/MiYu-lua)             | [ysc_demo](https://github.com/Duo-Star/yun-shu-chao)                   | [PasteHelper](https://github.com/Duo-Star/PasteHelper)         |                                                    |                                                            |
+| [MatCal2](https://github.com/Duo-Star/MatCal2)               | [Miyu](https://github.com/Duo-Star/Miyu)                               |                                                                |                                                    |                                                            |
+| [River-lua](https://github.com/Duo-Star/River-lua)           | [MathForest-planting](https://github.com/Duo-Star/MathForest-planting) |                                                                |                                                    |                                                            |
+| [Pakoo-lua](https://github.com/Duo-Star/Pakoo-lua)           |                                                                        |                                                                |                                                    |                                                            |
+| [PixelPath-lua](https://github.com/Duo-Star/PixelPath-lua)   |                                                                        |                                                                |                                                    |                                                            |
+| [MC-highway-lua](https://github.com/Duo-Star/MC-highway-lua) |                                                                        |                                                                |                                                    |                                                            |
+| [NatureMath-lua](https://github.com/Duo-Star/NatureMath-lua) |                                                                        |                                                                |                                                    |                                                            |
+| [Crystal-lua](https://github.com/Duo-Star/Crystal-lua)       |                                                                        |                                                                |                                                    |                                                            |
+| [Bad-Apple-lua](https://github.com/Duo-Star/Bad-Apple-lua)   |                                                                        |                                                                |                                                    |                                                            |
+| [AtomDay-lua](https://github.com/Duo-Star/AtomDay-lua)       |                                                                        |                                                                |                                                    |                                                            |
